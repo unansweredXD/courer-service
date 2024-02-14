@@ -11,7 +11,7 @@ from models.orders.order import Order
 class Courier(BaseModel):
     __tablename__ = 'couriers'
 
-    id = mapped_column(
+    sid = mapped_column(
         UUID(as_uuid=True),
         unique=True,
         nullable=False,
@@ -24,12 +24,12 @@ class Courier(BaseModel):
 
     districts = mapped_column(ARRAY(String), nullable=False)
 
-    order_id = mapped_column(ForeignKey('orders.id', use_alter=True), nullable=True)
+    order_sid = mapped_column(ForeignKey('orders.sid', use_alter=True), nullable=True)
 
     avg_orders = mapped_column(Integer, nullable=False, default=0)
 
     avg_order_time = mapped_column(Time, nullable=False, default=datetime.time(0, 0, 0))
 
     order = relationship(
-        Order, foreign_keys=[order_id], lazy="joined"
+        Order, foreign_keys=[order_sid], lazy="joined"
     )

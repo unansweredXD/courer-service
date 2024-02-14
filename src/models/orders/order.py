@@ -11,7 +11,7 @@ from common.enums.enums import OrderStatus
 class Order(BaseModel):
     __tablename__ = 'orders'
 
-    id = mapped_column(
+    sid = mapped_column(
         UUID(as_uuid=True),
         unique=True,
         nullable=False,
@@ -27,7 +27,7 @@ class Order(BaseModel):
 
     district = mapped_column(String, nullable=False)
 
-    courier_id = mapped_column(ForeignKey('couriers.id', use_alter=True))
+    courier_sid = mapped_column(ForeignKey('couriers.sid', use_alter=True))
 
     created = mapped_column(DateTime, default=datetime.utcnow)
 
