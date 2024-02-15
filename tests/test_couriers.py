@@ -12,9 +12,9 @@ def test_add_data():
 def test_add_courier():
     response = client.post("/api/courier", json={
         "sid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "name": "string",
+        "name": "Ivan",
         "districts": [
-            "string"
+            "Moscow"
         ]
     })
 
