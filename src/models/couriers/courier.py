@@ -24,12 +24,12 @@ class Courier(BaseModel):
 
     districts = mapped_column(ARRAY(String), nullable=False)
 
-    order_sid = mapped_column(ForeignKey('orders.sid', use_alter=True), nullable=True)
+    active_order = mapped_column(ForeignKey('orders.sid', use_alter=True), nullable=True)
 
-    avg_orders = mapped_column(Integer, nullable=False, default=0)
+    avg_day_orders = mapped_column(Integer, nullable=False, default=0)
 
-    avg_order_time = mapped_column(Time, nullable=False, default=datetime.time(0, 0, 0))
+    avg_order_complete_time = mapped_column(Time, nullable=False, default=datetime.time(0, 0, 0))
 
     order = relationship(
-        Order, foreign_keys=[order_sid], lazy="joined"
+        Order, foreign_keys=[active_order], lazy="joined"
     )

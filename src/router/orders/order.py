@@ -38,9 +38,7 @@ async def get_order(
             detail='Заказ с таким id не найден!'
         )
 
-    order_info = OrderInfo(courier_id=order.courier_sid, status=order.status)
-
-    return order_info
+    return OrderInfo(courier_id=order.courier_sid, status=order.status)
 
 
 @router.post('/{order_id}')
@@ -71,5 +69,5 @@ async def complete_order(
     await CourierService(db).complete_order_courier(completed_order)
 
     return {
-        'status': 'Заказ успешно завершен'
+        'status': 'success'
     }

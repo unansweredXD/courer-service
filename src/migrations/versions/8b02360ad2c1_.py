@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2f4dd7b341a0
+Revision ID: 8b02360ad2c1
 Revises: 
-Create Date: 2024-02-14 23:46:18.872381
+Create Date: 2024-02-16 00:23:12.803098
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2f4dd7b341a0'
+revision = '8b02360ad2c1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,10 +22,10 @@ def upgrade() -> None:
     sa.Column('sid', sa.UUID(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('districts', sa.ARRAY(sa.String()), nullable=False),
-    sa.Column('order_sid', sa.UUID(), nullable=True),
-    sa.Column('avg_orders', sa.Integer(), nullable=False),
-    sa.Column('avg_order_time', sa.Time(), nullable=False),
-    sa.ForeignKeyConstraint(['order_sid'], ['orders.sid'], use_alter=True),
+    sa.Column('active_order', sa.UUID(), nullable=True),
+    sa.Column('avg_day_orders', sa.Integer(), nullable=False),
+    sa.Column('avg_order_complete_time', sa.Time(), nullable=False),
+    sa.ForeignKeyConstraint(['active_order'], ['orders.sid'], use_alter=True),
     sa.PrimaryKeyConstraint('sid')
     )
     op.create_index(op.f('ix_couriers_sid'), 'couriers', ['sid'], unique=True)

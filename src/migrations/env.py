@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from common.db.models_meta import metadata
-from settings import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB
+from settings import POSTGRES_USER, POSTGRES_PASSWORD, HOST_WIN, POSTGRES_PORT, POSTGRES_DB
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -32,9 +32,10 @@ target_metadata = metadata
 def get_url():
     user = POSTGRES_USER
     password = POSTGRES_PASSWORD
+    host = HOST_WIN
     port = POSTGRES_PORT
     db = POSTGRES_DB
-    url = f"postgresql://{user}:{password}@localhost:{port}/{db}"
+    url = f"postgresql://{user}:{password}@{host}:{port}/{db}"
     return url
 
 

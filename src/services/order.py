@@ -7,7 +7,7 @@ from common.enums.enums import OrderStatus
 from models.couriers.repository.courier import courier_repository
 from models.orders.order import Order
 from models.orders.repository.order import order_repository
-from models.orders.schemas.order import AddOrder, AddedOrder
+from models.orders.schemas.order import AddOrder, AddedOrder, OrderInfo
 from services.abstract import AbstractService
 
 

@@ -6,6 +6,7 @@ load_dotenv()
 
 HOST = os.environ.get("HOST")
 PORT: int = int(os.environ.get("PORT"))
+HOST_WIN: str = os.environ.get("HOST_WIN")
 
 ON_PRODUCTION: bool = False
 SECRET_KEY = "secret"

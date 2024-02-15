@@ -3,13 +3,14 @@ from uuid import UUID
 
 from models.couriers.courier import Courier
 from models.couriers.repository.courier import courier_repository
+from models.couriers.schemas.courier import AddCourier
 from models.orders.order import Order
 from models.orders.repository.order import order_repository
 from services.abstract import AbstractService
 
 
 class CourierService(AbstractService):
-    async def add_courier(self, input_courier: Courier):
+    async def add_courier(self, input_courier: AddCourier):
         courier = Courier()
 
         courier.name = input_courier.name
@@ -34,7 +35,12 @@ class CourierService(AbstractService):
 
         order_list = await order_repository.get_all_by_courier_id(self.db_session, courier.sid)
 
-        new_avg_time = self.get_new_avg_time(order.completed, order.created, courier.avg_order_time, len(order_list))
+        new_avg_time = self.get_new_avg_time(
+            order.completed,
+            order.created,
+            courier.avg_order_complete_time,
+            len(order_list)
+        )
 
         new_avg_time = (datetime.datetime.min + new_avg_time).time()
 
@@ -49,7 +55,6 @@ class CourierService(AbstractService):
         }
 
         await courier_repository.update(self.db_session, courier, changes)
-
 
     @staticmethod
     def get_new_avg_time(

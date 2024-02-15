@@ -1,4 +1,4 @@
-from sqlalchemy.ext.declarative import declarative_base, as_declarative
+from sqlalchemy.orm import declarative_base, as_declarative
 from sqlalchemy.orm import declared_attr
 
 decl_base = declarative_base()
