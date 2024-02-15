@@ -32,10 +32,9 @@ target_metadata = metadata
 def get_url():
     user = POSTGRES_USER
     password = POSTGRES_PASSWORD
-    host = POSTGRES_HOST
     port = POSTGRES_PORT
     db = POSTGRES_DB
-    url = f"postgresql://{user}:{password}@{host}:{port}/{db}"
+    url = f"postgresql://{user}:{password}@localhost:{port}/{db}"
     return url
 
 
