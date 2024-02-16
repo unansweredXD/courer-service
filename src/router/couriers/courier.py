@@ -3,6 +3,7 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException
 
 from models.couriers.schemas.courier import AddCourier, CourierBase, CourierInfo
+from models.orders.schemas.order import OrderInfoForCourier
 from router.deps import PGSession
 from services.courier import CourierService
 
@@ -47,5 +48,10 @@ async def get_courier_info(
             status_code=404,
             detail='Курьер с таким id не найден!',
         )
+
+    if courier_info.active_order is not None:
+        active_order = OrderInfoForCourier(order_id=courier_info.order.sid, order_name=courier_info.order.name)
+
+        courier_info.active_order = active_order
 
     return courier_info

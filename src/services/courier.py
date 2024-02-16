@@ -1,6 +1,5 @@
 import datetime
 from uuid import UUID
-
 from models.couriers.courier import Courier
 from models.couriers.repository.courier import courier_repository
 from models.couriers.schemas.courier import AddCourier
@@ -26,9 +25,9 @@ class CourierService(AbstractService):
         return courier_list
 
     async def get_courier(self, courier_id: UUID):
-        courier_list = await courier_repository.get(self.db_session, courier_id)
+        courier = await courier_repository.get(self.db_session, courier_id)
 
-        return courier_list
+        return courier
 
     async def complete_order_courier(self, order: Order):
         courier = await courier_repository.get(self.db_session, order.courier_sid)
@@ -74,6 +73,8 @@ class CourierService(AbstractService):
 
     @staticmethod
     def get_new_avg_orders(order_count: int, order_list: list[Order]) -> int:
+        """ Метод пересчитывает среднее количество выполненых заказов за день """
+
         count_days = 1
         current_day = None
 
