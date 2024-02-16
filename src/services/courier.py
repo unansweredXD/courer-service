@@ -48,9 +48,9 @@ class CourierService(AbstractService):
         new_avg_orders = self.get_new_avg_orders(len(order_list), order_list)
 
         changes = {
-            'order_sid': None,
-            'avg_orders': new_avg_orders,
-            'avg_order_time': new_avg_time
+            'active_order': None,
+            'avg_day_orders': new_avg_orders,
+            'avg_order_complete_time': new_avg_time
         }
 
         await courier_repository.update(self.db_session, courier, changes)

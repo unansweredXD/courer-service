@@ -29,7 +29,7 @@ class OrderService(AbstractService):
         order = await order_repository.create(self.db_session, new_order)
 
         changes = {
-            'order_sid': order.sid
+            'active_order': order.sid
         }
 
         await courier_repository.update(self.db_session, free_courier, changes)

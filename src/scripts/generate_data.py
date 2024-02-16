@@ -54,11 +54,11 @@ def generate_orders():
             cur.execute(
                 f"INSERT INTO orders (sid, name, district, status, courier_sid, created) "
                 f"VALUES ('{order_sid}', '{faker.word()}', '{choice(districts)}', 'in_progress', '{courier_sid}', "
-                f"'{datetime.datetime.now() - datetime.timedelta(hours=random.randint(1, 10))}');"
+                f"'{datetime.datetime.utcnow() - datetime.timedelta(hours=random.randint(1, 10))}');"
             )
 
             cur.execute(
-                f"UPDATE couriers SET order_sid = '{order_sid}' WHERE sid = '{courier_sid}';"
+                f"UPDATE couriers SET active_order = '{order_sid}' WHERE sid = '{courier_sid}';"
             )
 
         conn.commit()
