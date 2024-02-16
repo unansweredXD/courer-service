@@ -33,6 +33,7 @@ class CourierService(AbstractService):
     async def complete_order_courier(self, order: Order):
         courier = await courier_repository.get(self.db_session, order.courier_sid)
 
+        # отсортированный по дате список заказов
         order_list = await order_repository.get_all_by_courier_id(self.db_session, courier.sid)
 
         new_avg_time = self.get_new_avg_time(
@@ -45,8 +46,6 @@ class CourierService(AbstractService):
         new_avg_time = (datetime.datetime.min + new_avg_time).time()
 
         new_avg_orders = self.get_new_avg_orders(len(order_list), order_list)
-
-        print(new_avg_orders)
 
         changes = {
             'order_sid': None,
